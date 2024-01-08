@@ -1,4 +1,6 @@
+-----------------------------------------------------------------------------------------------------------------------------------------------------
 # A. SQL statements creating the tables for the database
+-----------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 CREATE TABLE Author (
@@ -43,8 +45,10 @@ CREATE TABLE Borrower(
 
 
 
-
+-----------------------------------------------------------------------------------------------------------------------------------------------------
 # SECTION B - Insert Values into Tables
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+
 
 /* Inserting Values into Author Table */
 
@@ -498,6 +502,53 @@ INSERT INTO Client (`ClientID`,`ClientFirstName`,`ClientLastName`,`ClientDoB`,`O
 INSERT INTO Client (`ClientID`,`ClientFirstName`,`ClientLastName`,`ClientDoB`,`Occupation`) VALUES (78,'Christine','Lambert',1973,'School Teacher');
 INSERT INTO Client (`ClientID`,`ClientFirstName`,`ClientLastName`,`ClientDoB`,`Occupation`) VALUES (79,'Alysha','Lambert',2007,'Student');
 INSERT INTO Client (`ClientID`,`ClientFirstName`,`ClientLastName`,`ClientDoB`,`Occupation`) VALUES (80,'Maia','Grant',1984,'School Teacher');
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+Section C - Database Queries 
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+
+#1. Display All Contents of the Clients Table
+
+SELECT * FROM client;
+
+
+
+#2. First Names, Last Names, Ages, and Occupations of All Clients
+
+SELECT clientFirstName, clientLastName, (2024 - ClientDOB) AS 'Age', occupation
+FROM client;
+
+
+
+#3. First and Last Names of Clients That Borrowed Books in March 2018
+
+SELECT client.clientFirstName, client.clientLastName, borrower.borrowDate
+FROM client
+INNER JOIN borrower
+ON client.clientID = borrower.ClientID
+WHERE borrower.borrowDate REGEXP ('2018-03');
+
+
+
+#4. First and last names of the top 5 authors clients borrowed in 2017
+
+SELECT COUNT(borrower.borrowId) AS CheckedOut, author.authorLastName, author.authorFirstName
+FROM Borrower
+INNER JOIN book
+ON borrower.BookId = book.BookId
+INNER JOIN author
+ON book.AuthorID = author.AuthorId
+WHERE YEAR(Borrower.BorrowDate) = '2017'
+GROUP BY Author.AuthorLastName, AuthorFirstName
+ORDER BY CheckedOut DESC
+LIMIT 5;
+
+
+
+#5. 
+
+
 
 
 
