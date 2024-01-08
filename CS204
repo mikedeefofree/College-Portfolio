@@ -546,7 +546,20 @@ LIMIT 5;
 
 
 
-#5. 
+#5. Nationalities of the least 5 authors that clients borrowed during the years 2015-2017
+
+SELECT count(book.bookID) AS CheckedOut, authorNationality
+FROM author
+INNER JOIN book
+ON book.authorID = author.AuthorID
+INNER JOIN borrower
+ON borrower.bookID = book.BookID
+WHERE YEAR (borrower.BorrowDate) > '2014' and YEAR (borrower.BorrowDate) < '2018'
+GROUP BY authorNationality
+ORDER BY CheckedOut
+LIMIT 5;
+
+
 
 
 
