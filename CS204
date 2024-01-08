@@ -574,7 +574,17 @@ LIMIT 5;
 
 
 
+#7 Top borrowed genres for client born in years 1970-1980
 
+SELECT book.Genre, count(book.Genre) AS GenreCount
+FROM borrower
+INNER JOIN book
+ON borrower.borrowID = book.bookID
+INNER JOIN client
+ON borrower.clientID = client.clientID
+WHERE client.clientDOB BETWEEN 1970 AND 1980
+GROUP BY book.Genre
+ORDER BY genreCount DESC;
 
 
 
