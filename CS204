@@ -598,5 +598,13 @@ GROUP BY client.Occupation
 ORDER BY borrowCount DESC
 LIMIT 5;
 
+#9 Average number of borrowed books by job title
+
+SELECT client.Occupation, AVG(borrower.bookID) AS 'AvgNoBooksBorrowed'
+FROM borrower
+INNER JOIN client
+ON borrower.clientID = client.clientID
+GROUP BY client.occupation;
+
 
 
