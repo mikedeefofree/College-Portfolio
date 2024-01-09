@@ -621,13 +621,29 @@ HAVING ClientCount >=
 	(SELECT (COUNT(client.clientID) * 0.20) AS AB FROM client);
 
 
-#11 The top month of borrows in 2017
+*****************#11 The top month of borrows in 2017 **************
 
 select count(bookID) AS Borrows, MONTH(borrowDate) AS Month
 FROM borrower
 GROUP BY MONTH(borrowDate)
 ORDER BY borrows DESC
 LIMIT 1;
+
+
+
+# 12 Average number of borrows by age
+
+SELECT AVG(subquery.count)
+FROM
+	(SELECT (2024 - client.clientDOB) AS AGE, COUNT(borrower.borrowID) AS Count
+	FROM borrower
+	INNER JOIN client
+	ON borrower.clientID = client.ClientID
+    GROUP BY age
+    ORDER BY age) subquery;
+
+
+
 
 
 
