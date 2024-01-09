@@ -607,4 +607,17 @@ ON borrower.clientID = client.clientID
 GROUP BY client.occupation;
 
 
+#10 Create a VIEW and display the titles that were borrowed by at least 20% of clients
+
+CREATE VIEW titles_borrowed AS 
+SELECT book.bookTitle, COUNT(client.clientID) AS 'ClientCount'
+FROM borrower
+INNER JOIN book
+ON book.bookID = borrower.bookID
+INNER JOIN client
+ON borrower.clientID = client.clientID
+GROUP BY book.bookTitle
+HAVING ClientCount >= (SELECT (COUNT(client.clientID) * 0.20) AS AB FROM client);
+
+
 
