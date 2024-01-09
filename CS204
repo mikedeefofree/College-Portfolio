@@ -617,7 +617,9 @@ ON book.bookID = borrower.bookID
 INNER JOIN client
 ON borrower.clientID = client.clientID
 GROUP BY book.bookTitle
-HAVING ClientCount >= (SELECT (COUNT(client.clientID) * 0.20) AS AB FROM client);
+HAVING ClientCount >= 
+	(SELECT (COUNT(client.clientID) * 0.20) AS AB FROM client);
+
 
 
 
