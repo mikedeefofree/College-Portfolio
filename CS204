@@ -587,4 +587,16 @@ GROUP BY book.Genre
 ORDER BY genreCount DESC;
 
 
+#8 Top 5 occupations that borrowed the most in 2016
+
+SELECT client.occupation, count(borrower.borrowID) AS BorrowCount
+FROM borrower
+INNER JOIN client
+ON borrower.clientID = client.clientID
+WHERE YEAR(borrower.borrowDate) = '2016'
+GROUP BY client.Occupation
+ORDER BY borrowCount DESC
+LIMIT 5;
+
+
 
