@@ -621,5 +621,14 @@ HAVING ClientCount >=
 	(SELECT (COUNT(client.clientID) * 0.20) AS AB FROM client);
 
 
+#11 The top month of borrows in 2017
+
+select count(bookID) AS Borrows, MONTH(borrowDate) AS Month
+FROM borrower
+GROUP BY MONTH(borrowDate)
+ORDER BY borrows DESC
+LIMIT 1;
+
+
 
 
