@@ -512,7 +512,91 @@ Section C - Database Queries
 
 SELECT * FROM client;
 
+RESULTS:
 
+ClientID;ClientFirstName;ClientLastName;ClientDOB;Occupation
+1;Kaiden;Hill;2006;Student
+2;Alina;Morton;2010;Student
+3;Fania;Brooks;1983;"Food Scientist"
+4;Courtney;Jensen;2006;Student
+5;Brittany;Hill;1983;Firefighter
+6;Max;Rogers;2005;Student
+7;Margaret;McCarthy;1981;"School Psychologist"
+8;Julie;McCarthy;1973;Professor
+9;Ken;McCarthy;1974;"Securities Clerk"
+10;Britany;O'Quinn;1984;Violinist
+11;Conner;Gardner;1998;"Licensed Massage Therapist"
+12;Mya;Austin;1960;"Parquet Floor Layer"
+13;Thierry;Rogers;2004;Student
+14;Eloise;Rogers;1984;"Computer Security Manager"
+15;Gerard;Jackson;1979;"Oil Exploration Engineer"
+16;Randy;Day;1986;"Aircraft Electrician"
+17;Jodie;Page;1990;"Manufacturing Director"
+18;Coral;Rice;1996;"Window Washer"
+19;Ayman;Austin;2002;Student
+20;Jaxson;Austin;1999;"Repair Worker"
+21;Joel;Austin;1973;"Police Officer"
+22;Alina;Austin;2010;Student
+23;Elin;Austin;1962;"Payroll Clerk"
+24;Ophelia;Wolf;2004;Student
+25;Eliot;McGuire;1967;Dentist
+26;Peter;McKinney;1968;Professor
+27;Annabella;Henry;1974;Nurse
+28;Anastasia;Baker;2001;Student
+29;Tyler;Baker;1984;"Police Officer"
+30;Lilian;Ross;1983;"Insurance Agent"
+31;Thierry;Arnold;1975;"Bus Driver"
+32;Angelina;Rowe;1979;Firefighter
+33;Marcia;Rowe;1974;"Health Educator"
+34;Martin;Rowe;1976;"Ship Engineer"
+35;Adeline;Rowe;2005;Student
+36;Colette;Rowe;1963;Professor
+37;Diane;Clark;1975;"Payroll Clerk"
+38;Caroline;Clark;1960;Dentist
+39;Dalton;Clayton;1982;"Police Officer"
+40;Steve;Clayton;1990;"Bus Driver"
+41;Melanie;Clayton;1987;"Computer Engineer"
+42;Alana;Wilson;2007;Student
+43;Carson;Byrne;1995;"Food Scientist"
+44;Conrad;Byrne;2007;Student
+45;Ryan;Porter;2008;Student
+46;Elin;Porter;1978;"Computer Programmer"
+47;Tyler;Harvey;2007;Student
+48;Arya;Harvey;2008;Student
+49;Serena;Harvey;1978;"School Teacher"
+50;Lilly;Franklin;1976;Doctor
+51;Mai;Franklin;1994;Dentist
+52;John;Franklin;1999;Firefighter
+53;Judy;Franklin;1995;Firefighter
+54;Katy;Lloyd;1992;"School Teacher"
+55;Tamara;Allen;1963;"Ship Engineer"
+56;Maxim;Lyons;1985;"Police Officer"
+57;Allan;Lyons;1983;"Computer Engineer"
+58;Marc;Harris;1980;"School Teacher"
+59;Elin;Young;2009;Student
+60;Diana;Young;2008;Student
+61;Diane;Young;2006;Student
+62;Alana;Bird;2003;Student
+63;Anna;Becker;1979;"Security Agent"
+64;Katie;Grant;1977;Manager
+65;Joan;Grant;2010;Student
+66;Bryan;Bell;2001;Student
+67;Belle;Miller;1970;Professor
+68;Peggy;Stevens;1990;"Bus Driver"
+69;Steve;Williamson;1975;"HR Clerk"
+70;Tyler;Williamson;1999;Doctor
+71;Izabelle;Williamson;1990;"Systems Analyst"
+72;Annabel;Williamson;1960;Cashier
+73;Mohamed;Waters;1966;"Insurance Agent"
+74;Marion;Newman;1970;"Computer Programmer"
+75;Ada;Williams;1986;"Computer Programmer"
+76;Sean;Scott;1983;"Bus Driver"
+77;Farrah;Scott;1974;"Ship Engineer"
+78;Christine;Lambert;1973;"School Teacher"
+79;Alysha;Lambert;2007;Student
+80;Maia;Grant;1984;"School Teacher"
+
+-----------------------------------------------------------------------------------
 
 #2. First Names, Last Names, Ages, and Occupations of All Clients
 
@@ -520,6 +604,92 @@ SELECT clientFirstName, clientLastName, (2024 - ClientDOB) AS 'Age', occupation
 FROM client;
 
 
+RESULTS:
+
+clientFirstName;clientLastName;Age;occupation
+Kaiden;Hill;18;Student
+Alina;Morton;14;Student
+Fania;Brooks;41;"Food Scientist"
+Courtney;Jensen;18;Student
+Brittany;Hill;41;Firefighter
+Max;Rogers;19;Student
+Margaret;McCarthy;43;"School Psychologist"
+Julie;McCarthy;51;Professor
+Ken;McCarthy;50;"Securities Clerk"
+Britany;O'Quinn;40;Violinist
+Conner;Gardner;26;"Licensed Massage Therapist"
+Mya;Austin;64;"Parquet Floor Layer"
+Thierry;Rogers;20;Student
+Eloise;Rogers;40;"Computer Security Manager"
+Gerard;Jackson;45;"Oil Exploration Engineer"
+Randy;Day;38;"Aircraft Electrician"
+Jodie;Page;34;"Manufacturing Director"
+Coral;Rice;28;"Window Washer"
+Ayman;Austin;22;Student
+Jaxson;Austin;25;"Repair Worker"
+Joel;Austin;51;"Police Officer"
+Alina;Austin;14;Student
+Elin;Austin;62;"Payroll Clerk"
+Ophelia;Wolf;20;Student
+Eliot;McGuire;57;Dentist
+Peter;McKinney;56;Professor
+Annabella;Henry;50;Nurse
+Anastasia;Baker;23;Student
+Tyler;Baker;40;"Police Officer"
+Lilian;Ross;41;"Insurance Agent"
+Thierry;Arnold;49;"Bus Driver"
+Angelina;Rowe;45;Firefighter
+Marcia;Rowe;50;"Health Educator"
+Martin;Rowe;48;"Ship Engineer"
+Adeline;Rowe;19;Student
+Colette;Rowe;61;Professor
+Diane;Clark;49;"Payroll Clerk"
+Caroline;Clark;64;Dentist
+Dalton;Clayton;42;"Police Officer"
+Steve;Clayton;34;"Bus Driver"
+Melanie;Clayton;37;"Computer Engineer"
+Alana;Wilson;17;Student
+Carson;Byrne;29;"Food Scientist"
+Conrad;Byrne;17;Student
+Ryan;Porter;16;Student
+Elin;Porter;46;"Computer Programmer"
+Tyler;Harvey;17;Student
+Arya;Harvey;16;Student
+Serena;Harvey;46;"School Teacher"
+Lilly;Franklin;48;Doctor
+Mai;Franklin;30;Dentist
+John;Franklin;25;Firefighter
+Judy;Franklin;29;Firefighter
+Katy;Lloyd;32;"School Teacher"
+Tamara;Allen;61;"Ship Engineer"
+Maxim;Lyons;39;"Police Officer"
+Allan;Lyons;41;"Computer Engineer"
+Marc;Harris;44;"School Teacher"
+Elin;Young;15;Student
+Diana;Young;16;Student
+Diane;Young;18;Student
+Alana;Bird;21;Student
+Anna;Becker;45;"Security Agent"
+Katie;Grant;47;Manager
+Joan;Grant;14;Student
+Bryan;Bell;23;Student
+Belle;Miller;54;Professor
+Peggy;Stevens;34;"Bus Driver"
+Steve;Williamson;49;"HR Clerk"
+Tyler;Williamson;25;Doctor
+Izabelle;Williamson;34;"Systems Analyst"
+Annabel;Williamson;64;Cashier
+Mohamed;Waters;58;"Insurance Agent"
+Marion;Newman;54;"Computer Programmer"
+Ada;Williams;38;"Computer Programmer"
+Sean;Scott;41;"Bus Driver"
+Farrah;Scott;50;"Ship Engineer"
+Christine;Lambert;51;"School Teacher"
+Alysha;Lambert;17;Student
+Maia;Grant;40;"School Teacher"
+
+
+-----------------------------------------------------------------------------------
 
 #3. First and Last Names of Clients That Borrowed Books in March 2018
 
@@ -530,6 +700,19 @@ ON client.clientID = borrower.ClientID
 WHERE borrower.borrowDate REGEXP ('2018-03');
 
 
+RESULTS:
+
+clientFirstName;clientLastName;borrowDate
+Gerard;Jackson;2018-03-02
+Tyler;Baker;2018-03-11
+Angelina;Rowe;2018-03-10
+Marcia;Rowe;2018-03-18
+Carson;Byrne;2018-03-15
+Katy;Lloyd;2018-03-14
+Alysha;Lambert;2018-03-07
+Maia;Grant;2018-03-18
+
+-----------------------------------------------------------------------------------
 
 #4. First and last names of the top 5 authors clients borrowed in 2017
 
@@ -545,6 +728,16 @@ ORDER BY CheckedOut DESC
 LIMIT 5;
 
 
+RESULTS:
+
+CheckedOut;authorLastName;authorFirstName
+7;Smith;Sofia
+7;Martin;Elena
+7;Moore;Logan
+6;Brown;Maria
+5;Roy;Zoe
+
+-----------------------------------------------------------------------------------
 
 #5. Nationalities of the least 5 authors that clients borrowed during the years 2015-2017
 
@@ -560,6 +753,16 @@ ORDER BY CheckedOut
 LIMIT 5;
 
 
+RESULTS:
+
+CheckedOut;authorNationality
+3;Spain
+6;"Great Britain"
+7;China
+18;Brazil
+24;France
+
+-----------------------------------------------------------------------------------
 
 #6. The book that was most borrowed during the years 2015-2017
 
@@ -573,6 +776,16 @@ ORDER BY CheckedOut DESC
 LIMIT 5;
 
 
+RESULTS:
+
+bookTitle;CheckedOut
+The perfect match;13
+Electrical transformers;12
+Green nature;11
+Positive figures;11
+Performance evaluation;11
+
+-----------------------------------------------------------------------------------
 
 #7 Top borrowed genres for client born in years 1970-1980
 
@@ -587,6 +800,17 @@ GROUP BY book.Genre
 ORDER BY genreCount DESC;
 
 
+RESULTS:
+
+Genre;GenreCount
+Science;4
+Fiction;3
+Society;1
+Well being;1
+
+
+-----------------------------------------------------------------------------------
+
 #8 Top 5 occupations that borrowed the most in 2016
 
 SELECT client.occupation, count(borrower.borrowID) AS BorrowCount
@@ -598,6 +822,18 @@ GROUP BY client.Occupation
 ORDER BY borrowCount DESC
 LIMIT 5;
 
+
+RESULTS:
+
+occupation;BorrowCount
+Student;32
+Bus Driver;8
+Computer Programmer;6
+Dentist;6
+Firefighter;5
+-----------------------------------------------------------------------------------
+
+
 #9 Average number of borrowed books by job title
 
 SELECT client.Occupation, AVG(borrower.bookID) AS 'AvgNoBooksBorrowed'
@@ -605,6 +841,45 @@ FROM borrower
 INNER JOIN client
 ON borrower.clientID = client.clientID
 GROUP BY client.occupation;
+
+
+RESULTS:
+
+Occupation;AvgNoBooksBorrowed
+Student;15.9643
+Firefighter;13.6923
+School Psychologist;10.0000
+Professor;13.6429
+Securities Clerk;24.5000
+Violinist;15.0000
+Licensed Massage Therapist;16.0000
+Parquet Floor Layer;9.5000
+Computer Security Manager;17.3333
+Oil Exploration Engineer;15.6000
+Aircraft Electrician;24.0000
+Manufacturing Director;12.0000
+Window Washer;19.5000
+Repair Worker;23.0000
+Police Officer;16.0556
+Payroll Clerk;17.1667
+Dentist;13.5882
+Nurse;19.0000
+Insurance Agent;16.6250
+Bus Driver;12.8125
+Health Educator;14.0000
+Ship Engineer;17.1250
+Computer Engineer;9.8333
+Food Scientist;12.8000
+Computer Programmer;17.1176
+School Teacher;17.6667
+Doctor;18.7500
+Security Agent;16.0000
+Manager;14.0000
+HR Clerk;18.0000
+Systems Analyst;12.7500
+Cashier;24.8000
+
+-----------------------------------------------------------------------------------
 
 
 #10 Create a VIEW and display the titles that were borrowed by at least 20% of clients
@@ -621,15 +896,30 @@ HAVING ClientCount >=
 	(SELECT (COUNT(client.clientID) * 0.20) AS AB FROM client);
 
 
-*****************#11 The top month of borrows in 2017 **************
+RESULTS:
 
-select count(bookID) AS Borrows, MONTH(borrowDate) AS Month
+bookTitle;ClientCount
+Electrical transformers;18
+
+-----------------------------------------------------------------------------------
+
+
+#11 The top month of borrows in 2017 
+
+SELECT MONTH(borrowDate) AS Top_Month, COUNT(bookID) AS Borrows
 FROM borrower
-GROUP BY MONTH(borrowDate)
-ORDER BY borrows DESC
+GROUP BY borrowDate
+HAVING YEAR(borrowDate) = 2017
+ORDER BY borrows DESC, MONTH(borrowDate) DESC
 LIMIT 1;
 
 
+RESULTS:
+
+Top_Month;Borrows
+2;3
+
+-----------------------------------------------------------------------------------
 
 # 12 Average number of borrows by age
 
@@ -642,6 +932,13 @@ FROM
     GROUP BY age
     ORDER BY age) subquery;
 
+RESULTS:
+
+AVG(subquery.count)
+7.8947
+
+-----------------------------------------------------------------------------------
+
 
 # 13 The oldest and the youngest clients of the library
 
@@ -650,7 +947,17 @@ FROM client
 WHERE clientDOB = (SELECT MAX(clientDOB) FROM client) OR clientDOB = (SELECT MIN(clientDOB) FROM client)
 ORDER BY age;
 
+RESULTS:
 
+clientFirstName;clientLastName;AGE
+Alina;Morton;14
+Alina;Austin;14
+Joan;Grant;14
+Mya;Austin;64
+Caroline;Clark;64
+Annabel;Williamson;64
+
+-----------------------------------------------------------------------------------
 
 
 
