@@ -726,9 +726,13 @@ INNER JOIN book
 ON borrower.BookId = book.BookId
 INNER JOIN author
 ON book.AuthorID = author.AuthorId
+#filters results where the borrow date year value is 2017
 WHERE YEAR(Borrower.BorrowDate) = '2017'
+#groups results by author's first and last name, showing the count (aggregate function required for GROUP BY) of borrower ID's by the grouped names
 GROUP BY Author.AuthorLastName, AuthorFirstName
+#orders the results by the checked out column in descending order
 ORDER BY CheckedOut DESC
+#selects 5 results from the top of the list
 LIMIT 5;
 
 
@@ -751,9 +755,11 @@ INNER JOIN book
 ON book.authorID = author.AuthorID
 INNER JOIN borrower
 ON borrower.bookID = book.BookID
+# filters results where year in the borrow date column is greater than 2014 and less than 2018, selecting years 2015, 2016, 2017
 WHERE YEAR (borrower.BorrowDate) > '2014' and YEAR (borrower.BorrowDate) < '2018'
 GROUP BY authorNationality
 ORDER BY CheckedOut
+#selects 5 results from the top of the results list
 LIMIT 5;
 
 
@@ -774,9 +780,11 @@ SELECT book.bookTitle, count(borrower.bookID) AS CheckedOut
 FROM borrower
 INNER JOIN book
 ON borrower.BookID = book.BookID
+# filters results where year in the borrow date column is greater than 2014 and less than 2018, selecting years 2015, 2016, 2017
 WHERE YEAR (borrower.BorrowDate) > '2014' and YEAR (borrower.BorrowDate) < '2018'
 GROUP BY book.bookTitle
 ORDER BY CheckedOut DESC
+#selects 5 results from the top of the results list
 LIMIT 5;
 
 
@@ -799,8 +807,10 @@ INNER JOIN book
 ON borrower.borrowID = book.bookID
 INNER JOIN client
 ON borrower.clientID = client.clientID
+# filters results to provide clients DOB that fall between and including 1970 and 1980
 WHERE client.clientDOB BETWEEN 1970 AND 1980
 GROUP BY book.Genre
+# orders the results by genre count, from highest to lowest (descending order)
 ORDER BY genreCount DESC;
 
 
@@ -821,6 +831,7 @@ SELECT client.occupation, count(borrower.borrowID) AS BorrowCount
 FROM borrower
 INNER JOIN client
 ON borrower.clientID = client.clientID
+# filters results where the year of the borrow date is 2016
 WHERE YEAR(borrower.borrowDate) = '2016'
 GROUP BY client.Occupation
 ORDER BY borrowCount DESC
@@ -840,10 +851,12 @@ Firefighter;5
 
 #9 Average number of borrowed books by job title
 
+#selects the occupation in the client table, and the average of the values of the book ID column in the borrower table, displaying the column in the results as 'AvgNoBooksBorrowed'
 SELECT client.Occupation, AVG(borrower.bookID) AS 'AvgNoBooksBorrowed'
 FROM borrower
 INNER JOIN client
 ON borrower.clientID = client.clientID
+#groups the results by the occupation field, showing the average number of books borrowed as the 'AvgNoBooksBorrowed' by each occupation title
 GROUP BY client.occupation;
 
 
@@ -888,7 +901,9 @@ Cashier;24.8000
 
 #10 Create a VIEW and display the titles that were borrowed by at least 20% of clients
 
+#creates a view called 'titles_borrowed'
 CREATE VIEW titles_borrowed AS 
+#joins borrower, book, and client tables by common values
 SELECT book.bookTitle, COUNT(client.clientID) AS 'ClientCount'
 FROM borrower
 INNER JOIN book
@@ -896,6 +911,7 @@ ON book.bookID = borrower.bookID
 INNER JOIN client
 ON borrower.clientID = client.clientID
 GROUP BY book.bookTitle
+#subquery to select greater than 20% of clients
 HAVING ClientCount >= 
 	(SELECT (COUNT(client.clientID) * 0.20) AS AB FROM client);
 
@@ -913,6 +929,7 @@ Electrical transformers;18
 SELECT MONTH(borrowDate) AS Top_Month, COUNT(bookID) AS Borrows
 FROM borrower
 GROUP BY borrowDate
+#filters group by statement where year of the borrow date is 2017
 HAVING YEAR(borrowDate) = 2017
 ORDER BY borrows DESC, MONTH(borrowDate) DESC
 LIMIT 1;
@@ -927,8 +944,10 @@ Top_Month;Borrows
 
 # 12 Average number of borrows by age
 
+#selects the average of the subquery count of the number of borrows by age
 SELECT AVG(subquery.count)
 FROM
+	#subquery named as the alias 'subquery' to find age of clients and count borrows
 	(SELECT (2024 - client.clientDOB) AS AGE, COUNT(borrower.borrowID) AS Count
 	FROM borrower
 	INNER JOIN client
@@ -948,6 +967,7 @@ AVG(subquery.count)
 
 SELECT clientFirstName, clientLastName, (2024 - clientDOB) AS AGE
 FROM client
+#filters results of the max and min value of the client's DOB
 WHERE clientDOB = (SELECT MAX(clientDOB) FROM client) OR clientDOB = (SELECT MIN(clientDOB) FROM client)
 ORDER BY age;
 
