@@ -510,6 +510,7 @@ PART C - DATABASE QUERIES & RESULTS
 
 #1. Display All Contents of the Clients Table
 
+#selects all fields from the client table
 SELECT * FROM client;
 
 RESULTS:
@@ -600,6 +601,7 @@ ClientID;ClientFirstName;ClientLastName;ClientDOB;Occupation
 
 #2. First Names, Last Names, Ages, and Occupations of All Clients
 
+#selects the client's name, date of birth shown under 'Age' column, and occupation from the client table
 SELECT clientFirstName, clientLastName, (2024 - ClientDOB) AS 'Age', occupation
 FROM client;
 
@@ -695,8 +697,10 @@ Maia;Grant;40;"School Teacher"
 
 SELECT client.clientFirstName, client.clientLastName, borrower.borrowDate
 FROM client
+#joins the borrower table and the client table by matching condition, and matches by clientID which relates the tables
 INNER JOIN borrower
 ON client.clientID = borrower.ClientID
+#filters the borrow date where the year is 2018 and the month is '03' (march)
 WHERE borrower.borrowDate REGEXP ('2018-03');
 
 
