@@ -643,6 +643,16 @@ FROM
     ORDER BY age) subquery;
 
 
+# 13 The oldest and the youngest clients of the library
+
+SELECT clientFirstName, clientLastName, (2024 - clientDOB) AS AGE
+FROM client
+WHERE clientDOB = (SELECT MAX(clientDOB) FROM client) OR clientDOB = (SELECT MIN(clientDOB) FROM client)
+ORDER BY age;
+
+
+
+
 
 
 
