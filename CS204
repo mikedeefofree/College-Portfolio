@@ -3,7 +3,7 @@ PART A - SQL statements creating the tables for the database
 -------------------------------------------------------------------------
 
 
-CREATE TABLE Author (
+CREATE TABLE IF NOT EXISTS Author (
   AuthorID INT(10),
   AuthorFirstName VARCHAR(50),
   AuthorLastName VARCHAR(50),
@@ -11,7 +11,7 @@ CREATE TABLE Author (
   PRIMARY KEY (authorID)
 );
 
-CREATE TABLE Book (
+CREATE TABLE IF NOT EXISTS Book (
 	BookID INT(10),
 	BookTitle VARCHAR(100),
 	AuthorID INT(10),
@@ -20,7 +20,7 @@ PRIMARY KEY (BookID),
 FOREIGN KEY (AuthorID) REFERENCES Author(AuthorID) 
 );
 
-CREATE TABLE Client(
+CREATE TABLE IF NOT EXISTS Client(
 	ClientID INT(10),
     ClientFirstName VARCHAR(50),
     ClientLastName VARCHAR(50),
@@ -29,7 +29,7 @@ CREATE TABLE Client(
     PRIMARY KEY (ClientID)
 );
 
-CREATE TABLE Borrower(
+CREATE TABLE IF NOT EXISTS Borrower(
 	BorrowID INT(10),
     ClientID INT(10),
     BookID INT(10),
