@@ -1,8 +1,8 @@
 
 MICHAEL DIAZ
-CS204 FINAL ASSIGNMENT
+CS204 FINAL ASSIGNMENT V.2
 STUDY.COM
-JANUARY 10TH, 2024
+JANUARY 11TH, 2024
 
 
 -------------------------------------------------------------------------
@@ -917,9 +917,11 @@ Firefighter;5
 
 
 #9 Average number of borrowed books by job title
-////////////////////////////////////////////////////////
+
+#selects the client occupation, and the average count of books borrowed displaying as 'AverageBorrows'
 SELECT client.Occupation, COUNT(*)/COUNT(DISTINCT client.clientID) AS AverageBorrows
 FROM borrower
+#inner joins borrower and client table
 INNER JOIN client
 ON borrower.clientID = client.ClientID
 GROUP BY client.Occupation
@@ -982,21 +984,26 @@ HAVING ClientCount >=
 	(SELECT (COUNT(client.clientID) * 0.20) AS AB FROM client);
 
 
+#this query will use the view created above and display the same results
+SELECT * FROM titles_borrowed;
+
 RESULTS:
 
 bookTitle;ClientCount
 Electrical transformers;18
 
 -----------------------------------------------------------------------------------
-finish this
 
 #11 The top month of borrows in 2017 
 
+#selects the month from borrowDate displayed as 'Month' in the result field, and the count of borrowDate showing as "Borrows"
 SELECT MONTH(borrowDate) AS Month, COUNT(borrowDate) AS Borrows
 FROM borrower
+#filters year to 2017
 WHERE YEAR(borrowDate) = 2017
 GROUP BY MONTH(borrowDate)
 ORDER BY COUNT(borrowDate) DESC
+#limits results to top row
 LIMIT 1;
 
 
@@ -1008,6 +1015,7 @@ Month;Borrows
 
 # 12 Average number of borrows by age
 
+#selects client's age by subtracting current date by client DOB. Selects the average number of borrows and displays as 'AvgBorrows'
 SELECT (YEAR(curdate()) - client.clientDOB) AS Age, COUNT(DISTINCT Borrower.BorrowID) / COUNT(DISTINCT Client.ClientID) AS AvgBorrows
 FROM client
 INNER JOIN borrower
@@ -1084,18 +1092,18 @@ Annabel;Williamson;64
 
 
 #This query doesn't return any results because there are no authors that wrote books in more than one genre
-SELECT author.AuthorFirstName AS FirstName, author.authorLastName AS LastName, COUNT(subquery.Genre) AS GenresWritten
-FROM
-	#subquery named subquery to count the genres written
-	(SELECT author.AuthorID, book.Genre
-	FROM Author
-	INNER JOIN Book
-	ON Author.authorId = book.authorID
-	GROUP BY authorId) subquery
+SELECT author.AuthorFirstName, author.AuthorLastName, COUNT(book.genre) AS NoOfGenres 
+FROM book
 INNER JOIN author
-ON subquery.authorId = author.authorId
-GROUP BY LastName, FirstName
-HAVING GenresWritten > 1;
+ON book.AuthorID = author.AuthorID
+GROUP BY book.authorID
+#filters results to include authors who have written a book in two distinct genres by counting different genres and filtering by count which is greater than 1
+HAVING COUNT(DISTINCT book.Genre) > 1
+ORDER BY book.authorID;
+
+RESULTS:
+
+#There are no results because there are no authors that wrote books in more than one genre
 
 
 
