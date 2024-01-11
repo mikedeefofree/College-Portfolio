@@ -954,7 +954,7 @@ Cashier;24.8000
 
 #10 Create a VIEW and display the titles that were borrowed by at least 20% of clients
 
-#creates a view called 'titles_borrowed'
+#creates a view called 'titles_borrowed' showing the results of the query which follows 'AS'
 CREATE VIEW titles_borrowed AS 
 #joins borrower, book, and client tables by common values
 SELECT book.bookTitle, COUNT(client.clientID) AS 'ClientCount'
