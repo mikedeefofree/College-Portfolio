@@ -809,28 +809,29 @@ CheckedOut;authorLastName;authorFirstName
 
 #5. Nationalities of the least 5 authors that clients borrowed during the years 2015-2017
 
-SELECT count(book.bookID) AS CheckedOut, authorNationality
-FROM author
+#this query selects the author nationality and the count of books borrowed, joining three tables
+SELECT author.authorNationality, COUNT(borrower.bookID) AS BorrowCount
+FROM borrower
 INNER JOIN book
-ON book.authorID = author.AuthorID
-INNER JOIN borrower
 ON borrower.bookID = book.BookID
-/* filters results where year in the borrow date column is greater than 2014 and less than 2018, selecting years 2015, 2016, 2017 */
-WHERE YEAR (borrower.BorrowDate) > '2014' and YEAR (borrower.BorrowDate) < '2018'
-GROUP BY authorNationality
-ORDER BY CheckedOut
-#selects 5 results from the top of the results list
+INNER JOIN author
+ON book.AuthorID = author.AuthorID
+#filters results with borrow date years between 2015 and 2017
+WHERE YEAR (borrower.BorrowDate) BETWEEN 2015 AND 2017
+GROUP BY author.AuthorID
+ORDER BY BorrowCount
+#limits the results to the top 5
 LIMIT 5;
 
 
 RESULTS:
 
-CheckedOut;authorNationality
-3;Spain
-6;"Great Britain"
-7;China
-18;Brazil
-24;France
+authorNationality;BorrowCount
+Spain;3
+USA;5
+Canada;5
+USA;6
+Great Britain;6
 
 -----------------------------------------------------------------------------------
 
