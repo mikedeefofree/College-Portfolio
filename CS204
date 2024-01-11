@@ -917,51 +917,50 @@ Firefighter;5
 
 
 #9 Average number of borrowed books by job title
-
-/* selects the occupation in the client table, and the average of the values of the book ID column in the borrower table, displaying the column in the results as 'AvgNoBooksBorrowed' */
-SELECT client.Occupation, AVG(borrower.bookID) AS 'AvgNoBooksBorrowed'
+////////////////////////////////////////////////////////
+SELECT client.Occupation, COUNT(*)/COUNT(DISTINCT client.clientID) AS AverageBorrows
 FROM borrower
 INNER JOIN client
-ON borrower.clientID = client.clientID
-/* groups the results by the occupation field, showing the average number of books borrowed as the 'AvgNoBooksBorrowed' by each occupation title */
-GROUP BY client.occupation;
+ON borrower.clientID = client.ClientID
+GROUP BY client.Occupation
+ORDER BY client.Occupation;
 
 
 RESULTS:
 
-Occupation;AvgNoBooksBorrowed
-Student;15.9643
-Firefighter;13.6923
-School Psychologist;10.0000
-Professor;13.6429
-Securities Clerk;24.5000
-Violinist;15.0000
-Licensed Massage Therapist;16.0000
-Parquet Floor Layer;9.5000
-Computer Security Manager;17.3333
-Oil Exploration Engineer;15.6000
-Aircraft Electrician;24.0000
-Manufacturing Director;12.0000
-Window Washer;19.5000
-Repair Worker;23.0000
-Police Officer;16.0556
-Payroll Clerk;17.1667
-Dentist;13.5882
-Nurse;19.0000
-Insurance Agent;16.6250
-Bus Driver;12.8125
-Health Educator;14.0000
-Ship Engineer;17.1250
-Computer Engineer;9.8333
-Food Scientist;12.8000
-Computer Programmer;17.1176
-School Teacher;17.6667
-Doctor;18.7500
-Security Agent;16.0000
-Manager;14.0000
-HR Clerk;18.0000
-Systems Analyst;12.7500
-Cashier;24.8000
+Occupation;AverageBorrows
+Aircraft Electrician;2.0000
+Bus Driver;4.0000
+Cashier;5.0000
+Computer Engineer;3.0000
+Computer Programmer;5.6667
+Computer Security Manager;6.0000
+Dentist;5.6667
+Doctor;4.0000
+Firefighter;3.2500
+Food Scientist;5.0000
+Health Educator;2.0000
+HR Clerk;4.0000
+Insurance Agent;4.0000
+Licensed Massage Therapist;2.0000
+Manager;3.0000
+Manufacturing Director;5.0000
+Nurse;7.0000
+Oil Exploration Engineer;5.0000
+Parquet Floor Layer;2.0000
+Payroll Clerk;3.0000
+Police Officer;4.5000
+Professor;3.5000
+Repair Worker;3.0000
+School Psychologist;2.0000
+School Teacher;3.6000
+Securities Clerk;2.0000
+Security Agent;2.0000
+Ship Engineer;4.0000
+Student;4.4211
+Systems Analyst;4.0000
+Violinist;4.0000
+Window Washer;2.0000
 
 -----------------------------------------------------------------------------------
 
