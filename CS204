@@ -1008,22 +1008,55 @@ Month;Borrows
 
 # 12 Average number of borrows by age
 
-#selects the average of the subquery count of the number of borrows by age
-SELECT AVG(subquery.count)
-FROM
-	#subquery named as the alias 'subquery' to find age of clients and count borrows
-	(SELECT (2024 - client.clientDOB) AS AGE, COUNT(borrower.borrowID) AS Count
-	FROM borrower
-	INNER JOIN client
-	ON borrower.clientID = client.ClientID
-    GROUP BY age
-    ORDER BY age) subquery;
+SELECT (YEAR(curdate()) - client.clientDOB) AS Age, COUNT(DISTINCT Borrower.BorrowID) / COUNT(DISTINCT Client.ClientID) AS AvgBorrows
+FROM client
+INNER JOIN borrower
+ON borrower.clientID = client.clientID
+GROUP BY age
+ORDER BY age;
+
 
 RESULTS:
 
-AVG(subquery.count)
-7.8947
-
+Age;AvgBorrows
+14;2.3333
+16;6.0000
+17;5.0000
+18;5.5000
+19;4.5000
+20;3.0000
+21;5.0000
+22;2.0000
+23;4.5000
+25;3.6667
+26;2.0000
+28;2.0000
+29;4.5000
+30;10.0000
+32;3.0000
+34;5.5000
+37;2.0000
+38;3.0000
+39;4.0000
+40;5.5000
+41;3.7500
+42;3.0000
+43;2.0000
+44;1.0000
+45;4.3333
+46;5.5000
+47;3.0000
+48;3.5000
+49;2.6667
+50;3.2500
+51;3.6667
+54;4.5000
+56;4.0000
+57;3.0000
+58;1.0000
+61;5.0000
+62;3.0000
+64;3.6667
 -----------------------------------------------------------------------------------
 
 
