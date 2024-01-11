@@ -654,7 +654,7 @@ ClientID;ClientFirstName;ClientLastName;ClientDOB;Occupation
 
 #2. First Names, Last Names, Ages, and Occupations of All Clients
 
-/* selects the client's name, date of birth shown under 'Age' column, and occupation from the client table */
+/* selects the client's name, date of birth shown as 'Age' column in the results, and occupation from the client table */
 SELECT clientFirstName, clientLastName, (2024 - ClientDOB) AS 'Age', occupation
 FROM client;
 
@@ -1036,8 +1036,22 @@ Annabel;Williamson;64
 
 -----------------------------------------------------------------------------------
 
+#14. First and last names of authors that wrote books in more than one genre
 
 
+#This query doesn't return any results because there are no authors that wrote books in more than one genre
+SELECT author.AuthorFirstName AS FirstName, author.authorLastName AS LastName, COUNT(subquery.Genre) AS GenresWritten
+FROM
+	#subquery named subquery to count the genres written
+	(SELECT author.AuthorID, book.Genre
+	FROM Author
+	INNER JOIN Book
+	ON Author.authorId = book.authorID
+	GROUP BY authorId) subquery
+INNER JOIN author
+ON subquery.authorId = author.authorId
+GROUP BY LastName, FirstName
+HAVING GenresWritten > 1;
 
 
 
