@@ -2,46 +2,92 @@
 PART A - SQL statements creating the tables for the database
 -------------------------------------------------------------------------
 
+#creates a database called library if it does not already exist
+CREATE DATABASE IF NOT EXISTS library;
 
+
+/* creates table if it doesnt already exist called Author, with the field names AuthorID, AuthorFirstName, AuthorLastName, AuthorNationality */
+/* authorID is the primary key of the table */
 CREATE TABLE IF NOT EXISTS Author (
-  AuthorID INT(10),
-  AuthorFirstName VARCHAR(50),
-  AuthorLastName VARCHAR(50),
-  AuthorNationality VARCHAR(50),
-  PRIMARY KEY (authorID)
+	AuthorID INT(10),
+  	AuthorFirstName VARCHAR(50),
+ 	AuthorLastName VARCHAR(50),
+  	AuthorNationality VARCHAR(50),
+  	
+	PRIMARY KEY (authorID)
 );
 
+
+/* creates table if it doesnt already exist called Book, with the field names BookID, BookTitle, AuthorID, Genre */
+/* bookID is the primary key of this table */
+/* authorID is the foreign key of this table, relating it to the author table by the common field authorID */
 CREATE TABLE IF NOT EXISTS Book (
 	BookID INT(10),
 	BookTitle VARCHAR(100),
 	AuthorID INT(10),
-    Genre VARCHAR(50),
-PRIMARY KEY (BookID),
-FOREIGN KEY (AuthorID) REFERENCES Author(AuthorID) 
+	Genre VARCHAR(50),
+
+	PRIMARY KEY (BookID),
+	FOREIGN KEY (AuthorID) REFERENCES Author(AuthorID) 
 );
 
+
+/* creates table if it doesnt already exist called client, with the field names ClientID, ClientFirstName,CLientLastName, ClientDOB, Occupation */
+/* clientID is the primary key of the table */
 CREATE TABLE IF NOT EXISTS Client(
 	ClientID INT(10),
-    ClientFirstName VARCHAR(50),
-    ClientLastName VARCHAR(50),
-    ClientDOB YEAR,
-    Occupation varchar(100),
-    PRIMARY KEY (ClientID)
+	ClientFirstName VARCHAR(50),
+	ClientLastName VARCHAR(50),
+	ClientDOB YEAR,
+	Occupation varchar(100),
+	
+	PRIMARY KEY (ClientID)
 );
 
+
+/* creates table if it doesnt already exist called borrower, with the field names borrowID, clientID, bookID, BorrowDate */
+/* borrowID is the primary key of this table */
+/* client is the foreign key of this table, relating it to the client table by the common field clientID */
 CREATE TABLE IF NOT EXISTS Borrower(
 	BorrowID INT(10),
-    ClientID INT(10),
-    BookID INT(10),
-    BorrowDate DATE,
-    PRIMARY KEY(BorrowID),
-    FOREIGN KEY (BookID) REFERENCES Book(BookID),
-    FOREIGN KEY (ClientID) REFERENCES Client(ClientID) 
+	ClientID INT(10),
+	BookID INT(10),
+    	BorrowDate DATE,
+    
+	PRIMARY KEY(BorrowID),
+    	FOREIGN KEY (BookID) REFERENCES Book(BookID),
+    	FOREIGN KEY (ClientID) REFERENCES Client(ClientID) 
 );
 
 
+/* data types above follow the fields to specify the required data type for that field. Breakdown as follows:
+	INT(10) - integer with limit size of 10 digits
+	VARCHAR(50) - string character that has various sizes, with a limit size of 50 characters
+	YEAR - year 
+	DATE - date with integers shown as YYYY-MM-DD
+
+*/
+	
 
 
+
+#Creating Indexes
+
+/* creates a unique index named authorIndex on author first and last name fields in the author table. Index created for faster queries */
+CREATE UNIQUE INDEX authorIndex
+ON author (authorFirstName, authorLastName);
+
+/* creates a unique index named bookIndex on the bookTitle and genre fields in the book table. Index created for faster queries */
+CREATE UNIQUE INDEX bookIndex
+ON book (bookTitle, genre);
+
+/* creates a unique index named clientIndex on the client first & last names, client DOB, & occupation fields in the client table. Index created for faster queries */
+CREATE UNIQUE INDEX clientIndex
+ON client (clientFirstName, clientLastName, clientDOB, occupation);
+
+/* creates a unique index named borrowerIndex on the clientID and borrowDate fields in the borrower table */
+CREATE UNIQUE INDEX borrowerIndex
+ON borrower (clientID, borrowDate);
 
 
 
@@ -52,6 +98,7 @@ PART B - Insert Values into Tables
 
 /* Inserting Values into Author Table */
 
+#inserts data into the author table fields listed, corresponding with the actual values listed 
 INSERT INTO Author (`AuthorID`,`AuthorFirstName`,`AuthorLastName`,`AuthorNationality`) VALUES (1,'Sofia','Smith','Canada');
 INSERT INTO Author (`AuthorID`,`AuthorFirstName`,`AuthorLastName`,`AuthorNationality`) VALUES (2,'Maria','Brown','Brazil');
 INSERT INTO Author (`AuthorID`,`AuthorFirstName`,`AuthorLastName`,`AuthorNationality`) VALUES (3,'Elena','Martin','Mexico');
@@ -80,6 +127,8 @@ INSERT INTO Author (`AuthorID`,`AuthorFirstName`,`AuthorLastName`,`AuthorNationa
 
 /* Inserting Values into Book Table */
 
+
+#inserts data into the book table fields listed, corresponding with the actual values listed 
 INSERT INTO Book (`BookID`,`BookTitle`,`BookAuthor`,`Genre`) VALUES (1,'Build your database system',1,'Science');
 INSERT INTO Book (`BookID`,`BookTitle`,`BookAuthor`,`Genre`) VALUES (2,'The red wall',2,'Fiction');
 INSERT INTO Book (`BookID`,`BookTitle`,`BookAuthor`,`Genre`) VALUES (3,'The perfect match',3,'Fiction');
@@ -116,6 +165,8 @@ INSERT INTO Book (`BookID`,`BookTitle`,`BookAuthor`,`Genre`) VALUES (32,'Positiv
 
 /* Inserting Values into Borrower Table */
 
+
+#inserts data into the borrower table fields listed, corresponding with the actual values listed 
 INSERT INTO Borrower (`BorrowID`,`ClientID`,`BookID`,`BorrowDate`) VALUES (1,35,17,'2016-07-20');
 INSERT INTO Borrower (`BorrowID`,`ClientID`,`BookID`,`BorrowDate`) VALUES (2,1,3,'2017-04-19');
 INSERT INTO Borrower (`BorrowID`,`ClientID`,`BookID`,`BorrowDate`) VALUES (3,42,8,'2016-10-03');
@@ -422,6 +473,8 @@ INSERT INTO Borrower (`BorrowID`,`ClientID`,`BookID`,`BorrowDate`) VALUES (300,4
 
 /* Inserting Values into Client Table */
 
+
+#inserts data into the client table fields listed, corresponding with the actual values listed 
 INSERT INTO Client (`ClientID`,`ClientFirstName`,`ClientLastName`,`ClientDoB`,`Occupation`) VALUES (1,'Kaiden','Hill',2006,'Student');
 INSERT INTO Client (`ClientID`,`ClientFirstName`,`ClientLastName`,`ClientDoB`,`Occupation`) VALUES (2,'Alina','Morton',2010,'Student');
 INSERT INTO Client (`ClientID`,`ClientFirstName`,`ClientLastName`,`ClientDoB`,`Occupation`) VALUES (3,'Fania','Brooks',1983,'Food Scientist');
@@ -508,7 +561,7 @@ INSERT INTO Client (`ClientID`,`ClientFirstName`,`ClientLastName`,`ClientDoB`,`O
 PART C - DATABASE QUERIES & RESULTS
 -------------------------------------------------------------------------
 
-#1. Display All Contents of the Clients Table
+# 1. Display All Contents of the Clients Table
 
 #selects all fields from the client table
 SELECT * FROM client;
@@ -601,7 +654,7 @@ ClientID;ClientFirstName;ClientLastName;ClientDOB;Occupation
 
 #2. First Names, Last Names, Ages, and Occupations of All Clients
 
-#selects the client's name, date of birth shown under 'Age' column, and occupation from the client table
+/* selects the client's name, date of birth shown under 'Age' column, and occupation from the client table */
 SELECT clientFirstName, clientLastName, (2024 - ClientDOB) AS 'Age', occupation
 FROM client;
 
@@ -693,11 +746,11 @@ Maia;Grant;40;"School Teacher"
 
 -----------------------------------------------------------------------------------
 
-#3. First and Last Names of Clients That Borrowed Books in March 2018
+# 3. First and Last Names of Clients That Borrowed Books in March 2018
 
 SELECT client.clientFirstName, client.clientLastName, borrower.borrowDate
 FROM client
-#joins the borrower table and the client table by matching condition, and matches by clientID which relates the tables
+/* joins the borrower table and the client table by matching condition, and matches by clientID which relates the tables */
 INNER JOIN borrower
 ON client.clientID = borrower.ClientID
 #filters the borrow date where the year is 2018 and the month is '03' (march)
@@ -755,7 +808,7 @@ INNER JOIN book
 ON book.authorID = author.AuthorID
 INNER JOIN borrower
 ON borrower.bookID = book.BookID
-# filters results where year in the borrow date column is greater than 2014 and less than 2018, selecting years 2015, 2016, 2017
+/* filters results where year in the borrow date column is greater than 2014 and less than 2018, selecting years 2015, 2016, 2017 */
 WHERE YEAR (borrower.BorrowDate) > '2014' and YEAR (borrower.BorrowDate) < '2018'
 GROUP BY authorNationality
 ORDER BY CheckedOut
@@ -780,7 +833,7 @@ SELECT book.bookTitle, count(borrower.bookID) AS CheckedOut
 FROM borrower
 INNER JOIN book
 ON borrower.BookID = book.BookID
-# filters results where year in the borrow date column is greater than 2014 and less than 2018, selecting years 2015, 2016, 2017
+/* filters results where year in the borrow date column is greater than 2014 and less than 2018, selecting years 2015, 2016, 2017 */
 WHERE YEAR (borrower.BorrowDate) > '2014' and YEAR (borrower.BorrowDate) < '2018'
 GROUP BY book.bookTitle
 ORDER BY CheckedOut DESC
@@ -851,12 +904,12 @@ Firefighter;5
 
 #9 Average number of borrowed books by job title
 
-#selects the occupation in the client table, and the average of the values of the book ID column in the borrower table, displaying the column in the results as 'AvgNoBooksBorrowed'
+/* selects the occupation in the client table, and the average of the values of the book ID column in the borrower table, displaying the column in the results as 'AvgNoBooksBorrowed' */
 SELECT client.Occupation, AVG(borrower.bookID) AS 'AvgNoBooksBorrowed'
 FROM borrower
 INNER JOIN client
 ON borrower.clientID = client.clientID
-#groups the results by the occupation field, showing the average number of books borrowed as the 'AvgNoBooksBorrowed' by each occupation title
+/* groups the results by the occupation field, showing the average number of books borrowed as the 'AvgNoBooksBorrowed' by each occupation title */
 GROUP BY client.occupation;
 
 
