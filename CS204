@@ -988,24 +988,22 @@ bookTitle;ClientCount
 Electrical transformers;18
 
 -----------------------------------------------------------------------------------
-
+finish this
 
 #11 The top month of borrows in 2017 
 
-SELECT MONTH(borrowDate) AS Top_Month, COUNT(bookID) AS Borrows
+SELECT MONTH(borrowDate) AS Month, COUNT(borrowDate) AS Borrows
 FROM borrower
-GROUP BY borrowDate
-#filters group by statement where year of the borrow date is 2017
-HAVING YEAR(borrowDate) = 2017
-ORDER BY borrows DESC, MONTH(borrowDate) DESC
+WHERE YEAR(borrowDate) = 2017
+GROUP BY MONTH(borrowDate)
+ORDER BY COUNT(borrowDate) DESC
 LIMIT 1;
 
 
 RESULTS:
 
-Top_Month;Borrows
-2;3
-
+Month;Borrows
+10;10
 -----------------------------------------------------------------------------------
 
 # 12 Average number of borrows by age
