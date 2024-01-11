@@ -862,26 +862,32 @@ Performance evaluation;11
 
 #7 Top borrowed genres for client born in years 1970-1980
 
-SELECT book.Genre, count(book.Genre) AS GenreCount
+#this query joins the book, borrower, and client tables, showing the fields genre from the book table and the Count of how many times bookID shows up, shown under the column names 'TimesBorrowed
+SELECT book.Genre, COUNT(borrower.bookID) AS TimesBorrowed
 FROM borrower
 INNER JOIN book
-ON borrower.borrowID = book.bookID
+ON borrower.bookID = book.bookID
 INNER JOIN client
-ON borrower.clientID = client.clientID
-# filters results to provide clients DOB that fall between and including 1970 and 1980
-WHERE client.clientDOB BETWEEN 1970 AND 1980
+ON client.clientID = borrower.clientID
+#filters results to show clients born between 1970 and 1980
+WHERE client.ClientDOB BETWEEN 1970 AND 1980
 GROUP BY book.Genre
-# orders the results by genre count, from highest to lowest (descending order)
-ORDER BY genreCount DESC;
+#orders the results from highest amount of TimesBorrowed at the top, in descending order
+ORDER BY TimesBorrowed DESC;
 
 
 RESULTS:
 
-Genre;GenreCount
-Science;4
-Fiction;3
-Society;1
-Well being;1
+Genre;TimesBorrowed
+Science;24
+Fiction;16
+Well being;15
+Humor;5
+Society;4
+History;3
+Law;3
+Children;3
+Literature;3
 
 
 -----------------------------------------------------------------------------------
